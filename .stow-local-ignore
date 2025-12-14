@@ -23,4 +23,4 @@ _darcs
 ^/COPYING
 
 #ignoring MacOS files
-.DS_Store
+\.DS_Store

@@ -3,3 +3,4 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 fi
 
 alias cls=clear
+alias ll='ls -la'
