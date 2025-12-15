@@ -4,3 +4,6 @@ fi
 
 alias cls=clear
 alias ll='ls -la'
+
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
