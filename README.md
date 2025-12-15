@@ -53,3 +53,4 @@ $ stow .
 - [How to setup your Mac Terminal to be beautiful - Typecraft](https://www.youtube.com/watch?v=wNQpDWLs4To&list=PLsz00TDipIfct4F3pHv6_uI9OyjphQEGZ)
 - [Stow has forever changed the way I manage my dotfiles](https://www.youtube.com/watch?v=y6XCebnB9gs&t=97s)
 - [NEVER lose dotfiles again with GNU Stow - Typecraft](https://youtu.be/NoFiYOqnC4o?si=CGYaAQFyPp8uCBbH)
+- [Tmux for Newbs - Typecraft](https://www.youtube.com/watch?v=niuOc02Rvrc&list=PLsz00TDipIfdrJDjpULKY7mQlIFi4HjdR)
