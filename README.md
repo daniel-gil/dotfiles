@@ -37,6 +37,12 @@ If Ctrl+B+i do not work, execute this script:
 /.tmux/plugins/tpm/scripts/install_plugins.sh
 ```
 
+Install tmuxifier
+https://github.com/jimeh/tmuxifier
+```
+git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
+```
+
 Installation
 First, check out the dotfiles repo in your $HOME directory using git
 
