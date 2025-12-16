@@ -5,5 +5,8 @@ fi
 alias cls=clear
 alias ll='ls -la'
 
+export EDITOR=nvim
+export VISUAL=$EDITOR
+
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
