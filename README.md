@@ -62,3 +62,4 @@ $ stow .
 - [NEVER lose dotfiles again with GNU Stow - Typecraft](https://youtu.be/NoFiYOqnC4o?si=CGYaAQFyPp8uCBbH)
 - [Tmux for Newbs - Typecraft](https://www.youtube.com/watch?v=niuOc02Rvrc&list=PLsz00TDipIfdrJDjpULKY7mQlIFi4HjdR)
 - [Lazygit](https://github.com/jesseduffield/lazygit)
+- [Lazydocker](https://github.com/jesseduffield/lazydocker)
