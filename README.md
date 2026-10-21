@@ -32,7 +32,7 @@ brew install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 Install TPM plugins
-If Ctrl+B+i do not work, execute this script:
+If Ctrl+B+i do not work, install them manually executing this script:
 ```
 /.tmux/plugins/tpm/scripts/install_plugins.sh
 ```
