@@ -59,20 +59,38 @@ After saving, open `/hooks` in Claude Code or restart the session so the hooks a
 <img width="1281" height="456" alt="image" src="https://github.com/user-attachments/assets/2ffc34ef-23a7-4374-b7e4-1e28152492cc" />
 
 ### 2. The script, `~/.claude/hooks/notify.sh` (then chmod +x it)
+Install `terminal-notifier` (`brew install terminal-notifier`) so it can run a command on click, so you can bring `ghostty` forward and switch `tmux` to the session that pinged you. Verify that the notifications are enabled: `System Settings → Notifications` and scroll the app list for `terminal-notifier`.
+
+Then create a new file `~/.claude/hooks/notify.sh` with the notification script:
+
 ```bash
 #!/bin/bash
-event="$1"
+event="$1"   # start | done | input
 
-# Find which tmux session/pane Claude is running in
-session=$(tmux display -p -t "$TMUX_PANE" '#S' 2>/dev/null)
-pane_tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
+stamp="/tmp/claude-start-${TMUX_PANE#%}"
+if [ "$event" = start ]; then date +%s > "$stamp"; exit 0; fi
+if [ "$event" = done ] && [ -f "$stamp" ]; then
+  [ $(( $(date +%s) - $(cat "$stamp") )) -lt 20 ] && exit 0
+fi
 
-# Ring the bell in that pane so tmux flags the window
+session=$(tmux display -p -t "$TMUX_PANE" '#S')
+read -r attached win_active pane_active < <(
+  tmux display -p -t "$TMUX_PANE" '#{session_attached} #{window_active} #{pane_active}')
+front=$(lsappinfo info -only bundleid "$(lsappinfo front)" 2>/dev/null)
+
+if [ "$attached" -gt 0 ] && [ "$win_active" = 1 ] && [ "$pane_active" = 1 ] \
+   && [[ "$front" == *com.mitchellh.ghostty* ]]; then
+  exit 0
+fi
+
+pane_tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}')
 [ -n "$pane_tty" ] && printf '\a' > "$pane_tty"
 
-# Desktop notification (macOS)
-osascript -e "display notification \"Claude: $event\" with title \"${session:-claude}\" sound name \"Glass\""
-# Linux alternative: notify-send "${session:-claude}" "Claude: $event"
+window_id=$(tmux display -p -t "$TMUX_PANE" '#{window_id}')
+tmux_bin=$(command -v tmux)
+terminal-notifier -title "$session" -message "Claude: $event" -sound Glass \
+  -group "claude-$session" \
+  -execute "open -a Ghostty; $tmux_bin select-window -t '$window_id'; $tmux_bin switch-client -t '$session'"
 ```
 Writing the bell to the pane’s tty, rather than stdout, matters because hook output isn’t shown in the pane.
 
