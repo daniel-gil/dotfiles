@@ -1,6 +1,3 @@
-My dotfiles
-This directory contains the dotfiles for my system
-
 ## Prerequisites
 Ensure you have the following installed on your system
 - [HomeBrew](https://brew.sh/)
